@@ -1,0 +1,65 @@
+{
+    "VCAP_SERVICES": {
+        "hana": [
+            {
+                "name": "garagebtp2-db",
+                "instance_name": "garagebtp2-db",
+                "label": "hana",
+                "tags": [
+                    "hana",
+                    "database",
+                    "relational",
+                    "endpoint:https://api.cf.us10.hana.ondemand.com",
+                    "org:7f6db8e5trial",
+                    "space:dev"
+                ],
+                "plan": "hdi-shared",
+                "credentials": {
+                    "certificate": "-----BEGIN CERTIFICATE-----\nMIIDrzCCApegAwIBAgIQCDvgVpBCRrGhdWrJWZHHSjANBgkqhkiG9w0BAQUFADBh\nMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3\nd3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBD\nQTAeFw0wNjExMTAwMDAwMDBaFw0zMTExMTAwMDAwMDBaMGExCzAJBgNVBAYTAlVT\nMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j\nb20xIDAeBgNVBAMTF0RpZ2lDZXJ0IEdsb2JhbCBSb290IENBMIIBIjANBgkqhkiG\n9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4jvhEXLeqKTTo1eqUKKPC3eQyaKl7hLOllsB\nCSDMAZOnTjC3U/dDxGkAV53ijSLdhwZAAIEJzs4bg7/fzTtxRuLWZscFs3YnFo97\nnh6Vfe63SKMI2tavegw5BmV/Sl0fvBf4q77uKNd0f3p4mVmFaG5cIzJLv07A6Fpt\n43C/dxC//AH2hdmoRBBYMql1GNXRor5H4idq9Joz+EkIYIvUX7Q6hL+hqkpMfT7P\nT19sdl6gSzeRntwi5m3OFBqOasv+zbMUZBfHWymeMr/y7vrTC0LUq7dBMtoM1O/4\ngdW7jVg/tRvoSSiicNoxBN33shbyTApOB6jtSj1etX+jkMOvJwIDAQABo2MwYTAO\nBgNVHQ8BAf8EBAMCAYYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUA95QNVbR\nTLtm8KPiGxvDl7I90VUwHwYDVR0jBBgwFoAUA95QNVbRTLtm8KPiGxvDl7I90VUw\nDQYJKoZIhvcNAQEFBQADggEBAMucN6pIExIK+t1EnE9SsPTfrgT1eXkIoyQY/Esr\nhMAtudXH/vTBH1jLuG2cenTnmCmrEbXjcKChzUyImZOMkXDiqw8cvpOp/2PV5Adg\n06O/nVsJ8dWO41P0jmP6P6fbtGbfYmbW0W5BjfIttep3Sp+dWOIrWcBAI+0tKIJF\nPnlUkiaY4IBIqDfv8NZ5YBberOgOzW6sRBc4L0na4UU+Krk2U886UAb3LujEV0ls\nYSEY1QSteDwsOoBrp+uvFRTp2InBuThs4pFsiv9kuXclVzDAGySj4dzp30d8tbQk\nCAUw7C29C79Fv1C5qfPrmAESrciIxpg0X40KPMbp1ZWVbd4=\n-----END CERTIFICATE-----",
+                    "driver": "com.sap.db.jdbc.Driver",
+                    "hdi_password": "Vk8mwCaOq1QG7A-8JvjsEfpOwtgduSxF1ltz9rhLHy.LrIOOEEV0bVpX8oVLUvI2bNrjhKh-OlnhR_MmSB1Ju4gVy99Hzl79hGeq9u2aB1cwHZ7acGxSiOSj1Ca3TfW7",
+                    "hdi_user": "641E418B5A8E4ADDB179CB39767E9493_7JJDLZCXC5ZPP7YEUF9WZ33CN_DT",
+                    "host": "2291fa43-229d-412d-a3f8-a8a9d38f36a8.hana.trial-us10.hanacloud.ondemand.com",
+                    "password": "Vo9GVFt31dZN.D3BGEurY3xaNd4L6C2m0zC_a.5fU7ufOHt_COcuwTtH-OJQrWPu-eELOBtED9vO3puivEhXg8A.ra6-HSfS206vvpbO_D38CeG7C3wrJ5mreGPzfhQG",
+                    "port": "443",
+                    "schema": "641E418B5A8E4ADDB179CB39767E9493",
+                    "service_key_name": "key",
+                    "url": "jdbc:sap://2291fa43-229d-412d-a3f8-a8a9d38f36a8.hana.trial-us10.hanacloud.ondemand.com:443?encrypt=true\u0026validateCertificate=true\u0026currentschema=641E418B5A8E4ADDB179CB39767E9493",
+                    "user": "641E418B5A8E4ADDB179CB39767E9493_7JJDLZCXC5ZPP7YEUF9WZ33CN_RT"
+                }
+            }
+        ],
+        "xsuaa": [
+            {
+                "name": "garagebtp2-uaa",
+                "instance_name": "garagebtp2-uaa",
+                "label": "xsuaa",
+                "tags": [
+                    "xsuaa",
+                    "endpoint:https://api.cf.us10.hana.ondemand.com",
+                    "org:7f6db8e5trial",
+                    "space:dev"
+                ],
+                "plan": "application",
+                "credentials": {
+                    "apiurl": "https://api.authentication.us10.hana.ondemand.com",
+                    "clientid": "sb-garagebtp2-dev!t49576",
+                    "clientsecret": "btRCJWHObCPHqmKMKuDKGdvP/cU=",
+                    "credential-type": "instance-secret",
+                    "identityzone": "7f6db8e5trial",
+                    "identityzoneid": "da833e3c-e276-4941-b927-72e5af6b53ae",
+                    "sburl": "https://internal-xsuaa.authentication.us10.hana.ondemand.com",
+                    "service_key_name": "key",
+                    "subaccountid": "da833e3c-e276-4941-b927-72e5af6b53ae",
+                    "tenantid": "da833e3c-e276-4941-b927-72e5af6b53ae",
+                    "tenantmode": "dedicated",
+                    "uaadomain": "authentication.us10.hana.ondemand.com",
+                    "url": "https://7f6db8e5trial.authentication.us10.hana.ondemand.com",
+                    "verificationkey": "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtMaHogZbGONWFcoucfVcBLy2R36pAId5Fvm4Yja1Dt7V2Z8aBMO4O2yNjCkp5lDu3szZPwNvOeCrLATfXd+IYtdTr4dAqCZzfLd3phhuQm979wXwCyZ3dn0LUiIqbEkxUOQ/+L1G0FBoRey3dPoPtSBsR2oZ0ipKupu/XimZsp19lDycoUtFEfhM/HkBRwIiQaqSD6sHwgqygYyXylTEz67XGkPlN0zC0W9EStXYAMjLz9JSsqKMp6stL01iEH9rqGbrBXEsjd2ZD8/KljFmSA3RRTjZZsP8Rp6Xj6X96QVJKIJJBKem+JL0ugkI13EvSauJjZo0lC9hecfbZ7fmDQIDAQAB-----END PUBLIC KEY-----",
+                    "xsappname": "garagebtp2-dev!t49576",
+                    "zoneid": "da833e3c-e276-4941-b927-72e5af6b53ae"
+                }
+            }
+        ]
+    }
+}

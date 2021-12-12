@@ -1,0 +1,340 @@
+{
+  "namespace": "damo.aprobaciones",
+  "definitions": {
+    "damo.aprobaciones.CabeceraOrden": {
+      "kind": "entity",
+      "elements": {
+        "idcab": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "precioTotal": {
+          "type": "cds.String"
+        },
+        "creadoPor": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "prioridad": {
+          "type": "cds.Integer"
+        },
+        "aprobado": {
+          "type": "cds.Boolean"
+        },
+        "toDetalle": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "damo.aprobaciones.DetalleOrden",
+          "on": [
+            {
+              "ref": [
+                "toDetalle",
+                "cab"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "damo.aprobaciones.DetalleOrden": {
+      "kind": "entity",
+      "elements": {
+        "iddet": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "producto": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "descripcion": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "precioUnitario": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "cantidad": {
+          "type": "cds.Integer"
+        },
+        "cab": {
+          "type": "cds.Association",
+          "target": "damo.aprobaciones.CabeceraOrden",
+          "keys": [
+            {
+              "ref": [
+                "idcab"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "damo.aprobaciones.Productos": {
+      "kind": "entity",
+      "elements": {
+        "idProducto": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "descripcion": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "nse": {
+          "type": "cds.String",
+          "length": 18
+        }
+      }
+    },
+    "damo.aprobaciones.Salida": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "text": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "CatalogService": {
+      "@source": "srv/aprob-service.cds",
+      "kind": "service",
+      "@requires": "authenticated-user"
+    },
+    "CatalogService.OrdenesCab": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "damo.aprobaciones.CabeceraOrden"
+          ]
+        }
+      },
+      "elements": {
+        "idcab": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "precioTotal": {
+          "type": "cds.String"
+        },
+        "creadoPor": {
+          "type": "cds.String",
+          "length": 12
+        },
+        "prioridad": {
+          "type": "cds.Integer"
+        },
+        "aprobado": {
+          "type": "cds.Boolean"
+        },
+        "toDetalle": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.OrdenesItems",
+          "on": [
+            {
+              "ref": [
+                "toDetalle",
+                "cab"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "CatalogService.OrdenesItems": {
+      "kind": "entity",
+      "@readonly": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "damo.aprobaciones.DetalleOrden"
+          ]
+        }
+      },
+      "elements": {
+        "iddet": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "producto": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "descripcion": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "precioUnitario": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3
+        },
+        "cantidad": {
+          "type": "cds.Integer"
+        },
+        "cab": {
+          "type": "cds.Association",
+          "target": "CatalogService.OrdenesCab",
+          "keys": [
+            {
+              "ref": [
+                "idcab"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "CatalogService.Productos": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "damo.aprobaciones.Productos"
+          ]
+        }
+      },
+      "elements": {
+        "idProducto": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "descripcion": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "nse": {
+          "type": "cds.String",
+          "length": 18
+        }
+      }
+    },
+    "CatalogService.ProductosSinSerie": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "damo.aprobaciones.Productos"
+          ]
+        },
+        "excluding": [
+          "nse"
+        ]
+      },
+      "elements": {
+        "idProducto": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "descripcion": {
+          "type": "cds.String",
+          "length": 40
+        }
+      }
+    },
+    "CatalogService.ProductosConSerie": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "damo.aprobaciones.Productos"
+          ]
+        },
+        "columns": [
+          "*",
+          {
+            "ref": [
+              "nse"
+            ],
+            "as": "serie"
+          }
+        ],
+        "excluding": [
+          "nse"
+        ]
+      },
+      "elements": {
+        "idProducto": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "descripcion": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "serie": {
+          "type": "cds.String",
+          "length": 18
+        }
+      }
+    },
+    "CatalogService.ProductosSelect": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "damo.aprobaciones.Productos"
+            ]
+          },
+          "columns": [
+            {
+              "ref": [
+                "descripcion"
+              ]
+            },
+            {
+              "ref": [
+                "nse"
+              ],
+              "as": "serie"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "descripcion": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "serie": {
+          "type": "cds.String",
+          "length": 18
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v2.11.2",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}
