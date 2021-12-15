@@ -2,6 +2,8 @@ using damo.aprobaciones as aprob from '../db/aprob-model';
 
 @requires: 'authenticated-user'
 
+//@(impl : './aprob-service.js')
+
 service CatalogService {
     //OrdenesCab
     entity OrdenesCab as projection on aprob.CabeceraOrden;
@@ -29,4 +31,10 @@ service CatalogService {
         descripcion,
         nse as serie
     };
+
+    //salida custom sin persistencia
+    entity Reporte as projection on aprob.Salida;
+
+    //Salida con error
+    entity Errores as projection on aprob.Salida;
 }

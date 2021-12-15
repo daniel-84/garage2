@@ -330,6 +330,46 @@
           "length": 18
         }
       }
+    },
+    "CatalogService.Reporte": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "damo.aprobaciones.Salida"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "text": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "CatalogService.Errores": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "damo.aprobaciones.Salida"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "text": {
+          "type": "cds.String"
+        }
+      }
     }
   },
   "meta": {

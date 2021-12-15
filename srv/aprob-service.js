@@ -1,54 +1,43 @@
 module.exports = srv=>{
     const {Salida, Productos} = cds.entities;   //srv.entities;
 
-    srv.on("READ", Salida, (req)=>{
-        debugger;
-
-        //const sal = await cds.read(Productos)
-        //cds.tx(req).run(SELECT.from(Productos))
-
-        debugger;
-    })
-
-    /*srv.on("READ", "Reporte", async(req)=>{
-        debugger;
-
-        const sal =  await cds.tx(req).run(SELECT.from(Productos))
-
-        return sal
-
-        debugger;
-    })  */  
+    srv.after("READ", "ProductosSinSerie", async(items)=>{
+        items.forEach(element=>{
+            element.descripcion = element.descripcion + "(Salida custom)"
+        });
+    }) 
 
     srv.on("READ", "ProductosSelect", async(req, next)=>{
-        debugger;
-
         const items = await next()
-        //const sal =  await cds.tx(req).run(SELECT.from(Productos))
-        debugger
+
+        items.forEach(element=>{
+            element.descripcion = element.descripcion + "(Salida custom)"
+        });
 
         return items        
     })       
     
     srv.on("READ", "Reporte", async(req)=>{
-        debugger;
-
+        
         //const items = await next()
-        //const sal =  await cds.tx(req).run(SELECT.from(Productos))
+        const sal =  await cds.tx(req).run(SELECT.from(Productos))
+
         var item = [
             {
-                ID : 1233,
-                text : "saraza"
+                ID : sal[0].idProducto.slice(1),
+                text : `Esta es la descripcion del producto: ${sal[0].descripcion}`
             },
             {
                 ID : 4444,
-                text : "saraza2",
+                text : "Producto default",
             }            
         ]
 
-        debugger
-
-        return item      
-    })     
+        return item  
+    })  
+    
+    srv.on("READ", "Errores", (req)=>{
+        req.reject(500, "Hubo un quilombo en el backend")
+    })
 
 }
